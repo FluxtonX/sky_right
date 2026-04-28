@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/sign_in_screen.dart';
+import 'package:sky_rightz_360/view/auth/sign_in_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -7,7 +7,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA), // Off-white background
+      backgroundColor: const Color(0xFF0B1222), // Dark Navy background
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
@@ -18,20 +18,22 @@ class ForgotPasswordScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(
                         Icons.arrow_back,
-                        color: Color(0xFF6B7280),
+                        color: Color(0xFF9CA3AF),
                         size: 20,
                       ),
                       const SizedBox(width: 8),
                       const Text(
                         'Back to Sign In',
                         style: TextStyle(
-                          color: Color(0xFF6B7280),
+                          color: Color(0xFF9CA3AF),
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                         ),
@@ -49,11 +51,11 @@ class ForgotPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF111827), // Dark grey/black
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 12),
-
+              
               // Subtitle
               const Text(
                 "No worries! Enter your email and we'll send\nyou reset instructions",
@@ -61,7 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   height: 1.4,
-                  color: Color(0xFF6B7280), // Gray
+                  color: Color(0xFF9CA3AF), // Gray
                 ),
               ),
               const SizedBox(height: 40),
@@ -72,19 +74,19 @@ class ForgotPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF4B5563),
+                  color: Colors.white70,
                 ),
               ),
               const SizedBox(height: 8),
               TextField(
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'your@email.com',
-                  hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+                  hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                   prefixIcon:
-                      const Icon(Icons.mail_outline, color: Color(0xFF6B7280)),
+                      const Icon(Icons.mail_outline, color: Color(0xFF9CA3AF)),
                   filled: true,
-                  fillColor:
-                      const Color(0xFFEBF0FE), // Light blueish-gray background
+                  fillColor: const Color(0xFF1F2937), // Dark Gray background
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -99,8 +101,8 @@ class ForgotPasswordScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2962FF),
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFFFFC229), // Gold/Yellow
+                  foregroundColor: Colors.black,
                   elevation: 0,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -124,7 +126,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   const Text(
                     "Remember your password? ",
                     style: TextStyle(
-                      color: Color(0xFF6B7280),
+                      color: Color(0xFF9CA3AF),
                       fontSize: 14,
                     ),
                   ),
@@ -140,7 +142,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     child: const Text(
                       'Sign In',
                       style: TextStyle(
-                        color: Color(0xFF2962FF),
+                        color: Color(0xFFFFC229),
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),

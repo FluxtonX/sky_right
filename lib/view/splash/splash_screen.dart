@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/sign_in_screen.dart';
+import 'package:sky_rightz_360/view/auth/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,24 +22,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF2962FF), // Royal Blue color
+    return const Scaffold(
+      backgroundColor: Color(0xFF0B1222), // Dark Navy background
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Using a generic flight icon as placeholder for the exact logo
-            // If you have the exact asset, we can replace it with Image.asset()
-            const Icon(
+            Icon(
               Icons.flight_takeoff,
-              color: Colors.white,
+              color: Color(0xFFFFC229), // Gold/Yellow color
               size: 80,
             ),
-            const SizedBox(height: 16),
-            const Text(
+            SizedBox(height: 16),
+            Text(
               'Sky Rightz 360',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFFFFC229), // Gold/Yellow color
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/sign_in_screen.dart';
+import 'package:sky_rightz_360/view/auth/forgot_password_screen.dart';
+import 'package:sky_rightz_360/view/onboarding/onboarding_screen.dart';
+import 'package:sky_rightz_360/view/auth/sign_up_screen.dart';
+import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA), // Off-white background
+      backgroundColor: const Color(0xFF0B1222), // Dark Navy background
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
@@ -27,12 +31,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: 72,
                   height: 72,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2962FF),
+                    color: const Color(0xFFFFC229), // Gold/Yellow
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Icon(
                     Icons.flight_takeoff,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 36,
                   ),
                 ),
@@ -41,53 +45,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               // Welcome Text
               const Text(
-                'Create Account',
+                'Welcome Back',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF111827), // Dark grey/black
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                'Join SkyRightz360 and protect your travel rights',
+                'Sign in to your SkyRightz360 account',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,
-                  color: Color(0xFF6B7280), // Gray
+                  color: Color(0xFF9CA3AF), // Gray
                 ),
               ),
               const SizedBox(height: 32),
-
-              // Full Name Field
-              const Text(
-                'Full Name',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF4B5563),
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Ali Khan',
-                  hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
-                  prefixIcon: const Icon(Icons.person_outline,
-                      color: Color(0xFF6B7280)),
-                  filled: true,
-                  fillColor:
-                      const Color(0xFFEBF0FE), // Light blueish-gray background
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                keyboardType: TextInputType.name,
-              ),
-              const SizedBox(height: 20),
 
               // Email Field
               const Text(
@@ -95,19 +70,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF4B5563),
+                  color: Colors.white70,
                 ),
               ),
               const SizedBox(height: 8),
               TextField(
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'your@email.com',
-                  hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+                  hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                   prefixIcon:
-                      const Icon(Icons.mail_outline, color: Color(0xFF6B7280)),
+                      const Icon(Icons.mail_outline, color: Color(0xFF9CA3AF)),
                   filled: true,
-                  fillColor:
-                      const Color(0xFFEBF0FE), // Light blueish-gray background
+                  fillColor: const Color(0xFF1F2937), // Dark Gray background
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -124,23 +99,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF4B5563),
+                  color: Colors.white70,
                 ),
               ),
               const SizedBox(height: 8),
               TextField(
                 obscureText: !_isPasswordVisible,
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: '••••••••',
-                  hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+                  hintStyle: const TextStyle(color: Color(0xFF6B7280)),
                   prefixIcon:
-                      const Icon(Icons.lock_outline, color: Color(0xFF6B7280)),
+                      const Icon(Icons.lock_outline, color: Color(0xFF9CA3AF)),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
-                      color: const Color(0xFF6B7280),
+                      color: const Color(0xFF9CA3AF),
                     ),
                     onPressed: () {
                       setState(() {
@@ -149,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   filled: true,
-                  fillColor: const Color(0xFFEBF0FE),
+                  fillColor: const Color(0xFF1F2937),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide.none,
@@ -157,14 +133,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   contentPadding: const EdgeInsets.symmetric(vertical: 16),
                 ),
               ),
-              const SizedBox(height: 24), // No forgot password link
+              const SizedBox(height: 12),
 
-              // Sign Up / Sign In Button (Using "Sign In" as per exact design image)
+              // Forgot Password
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordScreen(),
+                      ),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(0, 0),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'Forgot password?',
+                    style: TextStyle(
+                      color: Color(0xFFFFC229),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Sign In Button
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OnboardingScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2962FF),
-                  foregroundColor: Colors.white,
+                  backgroundColor: const Color(0xFFFFC229), // Gold/Yellow
+                  foregroundColor: Colors.black,
                   elevation: 0,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
@@ -172,7 +183,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 child: const Text(
-                  'Sign In', // Text from provided design exactly
+                  'Sign In',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -185,21 +196,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Row(
                 children: [
                   const Expanded(
-                    child: Divider(color: Color(0xFFE5E7EB), thickness: 1),
+                    child: Divider(color: Color(0xFF1F2937), thickness: 1),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       'Or continue with',
                       style: TextStyle(
-                        color: const Color(0xFF6B7280),
+                        color: const Color(0xFF9CA3AF),
                         fontSize: 13,
-                        backgroundColor: const Color(0xFFF8F9FA),
+                        backgroundColor: const Color(0xFF0B1222),
                       ),
                     ),
                   ),
                   const Expanded(
-                    child: Divider(color: Color(0xFFE5E7EB), thickness: 1),
+                    child: Divider(color: Color(0xFF1F2937), thickness: 1),
                   ),
                 ],
               ),
@@ -211,13 +222,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {},
-                      icon: const Text(
-                        'G',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
+                      icon: SvgPicture.asset(
+                        'assets/icons/google.svg',
+                        height: 20,
+                        width: 20,
                       ),
                       label: const Text(
                         'Google',
@@ -240,8 +248,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {},
-                      icon: const Icon(Icons.facebook,
-                          color: Colors.black, size: 20),
+                      icon: SvgPicture.asset(
+                        'assets/icons/facebook.svg',
+                        height: 20,
+                        width: 20,
+                      ),
                       label: const Text(
                         'Facebook',
                         style: TextStyle(
@@ -270,13 +281,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Icon(
                     Icons.shield_outlined,
                     size: 16,
-                    color: Color(0xFF6B7280),
+                    color: Color(0xFF9CA3AF),
                   ),
                   const SizedBox(width: 6),
                   const Text(
                     'Secure & Encrypted',
                     style: TextStyle(
-                      color: Color(0xFF6B7280),
+                      color: Color(0xFF9CA3AF),
                       fontSize: 13,
                     ),
                   ),
@@ -284,14 +295,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 24),
 
-              // Bottom Link
+              // Sign Up Link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Don't have an account? ",
                     style: TextStyle(
-                      color: Color(0xFF6B7280),
+                      color: Color(0xFF9CA3AF),
                       fontSize: 14,
                     ),
                   ),
@@ -299,13 +310,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignInScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpScreen()),
                       );
                     },
                     child: const Text(
-                      'Sign In', // Exact text from the design image
+                      'Sign Up',
                       style: TextStyle(
-                        color: Color(0xFF2962FF),
+                        color: Color(0xFFFFC229),
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),

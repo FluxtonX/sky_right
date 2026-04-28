@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/forgot_password_screen.dart';
-import 'package:sky_rightz_360/view/sign_in_screen.dart';
-import 'package:sky_rightz_360/view/sign_up_screen.dart';
-import 'view/splash_screen.dart';
+import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
+import 'package:sky_rightz_360/view/auth/forgot_password_screen.dart';
+import 'package:sky_rightz_360/view/auth/sign_in_screen.dart';
+import 'package:sky_rightz_360/view/auth/sign_up_screen.dart';
+import 'package:sky_rightz_360/view/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

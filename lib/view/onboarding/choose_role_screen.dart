@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
 
 class ChooseRoleScreen extends StatelessWidget {
   const ChooseRoleScreen({super.key});
@@ -38,6 +39,7 @@ class ChooseRoleScreen extends StatelessWidget {
 
               // Role Cards
               _buildRoleCard(
+                context: context,
                 color: const Color(0xFF2962FF), // Blue
                 icon: Icons.person_outline,
                 title: 'Traveler',
@@ -47,15 +49,16 @@ class ChooseRoleScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               _buildRoleCard(
+                context: context,
                 color: const Color(0xFFFF6D00), // Orange
                 icon: Icons.domain, // Or Icons.corporate_fare / Icons.business
                 title: 'Travel Agency',
-                subtitle:
-                    'Agencies managing disruptions for multiple clients',
+                subtitle: 'Agencies managing disruptions for multiple clients',
               ),
               const SizedBox(height: 20),
 
               _buildRoleCard(
+                context: context,
                 color: const Color(0xFF00C853), // Green
                 icon: Icons.work_outline, // Suitcase icon
                 title: 'Corporate Travel Desk',
@@ -98,74 +101,85 @@ class ChooseRoleScreen extends StatelessWidget {
   }
 
   Widget _buildRoleCard({
+    required BuildContext context,
     required Color color,
     required IconData icon,
     required String title,
     required String subtitle,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Icon Container
-          Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 28,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DashboardScreen(),
           ),
-          const SizedBox(width: 16),
-          
-          // Texts
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF111827),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    height: 1.4,
-                    color: Color(0xFF6B7280),
-                  ),
-                ),
-              ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xFFE5E7EB)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Icon Container
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 28,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
+            const SizedBox(width: 16),
 
-          // Right Chevron
-          const Padding(
-            padding: EdgeInsets.only(top: 8.0),
-            child: Icon(
-              Icons.chevron_right,
-              color: Color(0xFF9CA3AF), // Light gray
-              size: 20,
+            // Texts
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF111827),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.4,
+                      color: Color(0xFF6B7280),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 12),
+
+            // Right Chevron
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Icon(
+                Icons.chevron_right,
+                color: Color(0xFF9CA3AF), // Light gray
+                size: 20,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
