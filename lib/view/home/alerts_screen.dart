@@ -6,7 +6,8 @@ import 'package:sky_rightz_360/view/home/profile_screen.dart';
 import 'package:sky_rightz_360/view/resolution/resolution_dashboard_screen.dart';
 
 class AlertsScreen extends StatefulWidget {
-  const AlertsScreen({super.key});
+  final Function(int)? onSwitchTab;
+  const AlertsScreen({super.key, this.onSwitchTab});
 
   @override
   State<AlertsScreen> createState() => _AlertsScreenState();
@@ -19,151 +20,131 @@ class _AlertsScreenState extends State<AlertsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B1222), // Dark Navy background
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Alerts',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Alerts',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Real-time disruption detection and monitoring',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white.withOpacity(0.6),
-                    ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Real-time disruption detection and monitoring',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white.withOpacity(0.6),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
 
-            // Filter Chips
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: _filters.map((filter) {
-                    final isSelected = _selectedFilter == filter;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: GestureDetector(
-                        onTap: () => setState(() => _selectedFilter = filter),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          decoration: BoxDecoration(
+          // Filter Chips
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: _filters.map((filter) {
+                  final isSelected = _selectedFilter == filter;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: GestureDetector(
+                      onTap: () => setState(() => _selectedFilter = filter),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: isSelected 
+                              ? const Color(0xFFFFC229) 
+                              : const Color(0xFF1F2937),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
                             color: isSelected 
                                 ? const Color(0xFFFFC229) 
-                                : const Color(0xFF1F2937),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: isSelected 
-                                  ? const Color(0xFFFFC229) 
-                                  : Colors.transparent,
-                            ),
+                                : Colors.transparent,
                           ),
-                          child: Text(
-                            filter,
-                            style: TextStyle(
-                              color: isSelected ? Colors.black : Colors.white70,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                            ),
+                        ),
+                        child: Text(
+                          filter,
+                          style: TextStyle(
+                            color: isSelected ? Colors.black : Colors.white70,
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                           ),
                         ),
                       ),
-                    );
-                  }).toList(),
-                ),
+                    ),
+                  );
+                }).toList(),
               ),
             ),
+          ),
 
-            // Alerts List
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  _buildAlertCard(
-                    flightCode: 'W3 205',
-                    airline: 'Air Peace',
-                    priority: 'CRITICAL',
-                    time: '2 hours ago',
-                    eventType: 'Flight Cancelled',
-                    eventDesc: 'Your flight from Lagos to Abuja has been cancelled by the airline.',
-                    rights: 'Full refund or rebooking + ₦45,000 compensation',
-                    icon: Icons.warning_rounded,
-                    iconColor: const Color(0xFFEF4444),
-                  ),
-                  _buildAlertCard(
-                    flightCode: 'AA 301',
-                    airline: 'Arik Air',
-                    priority: 'HIGH',
-                    time: '5 hours ago',
-                    eventType: '4 Hour Delay',
-                    eventDesc: 'Departure delayed from 14:00 to 18:00. Monitor for updates.',
-                    rights: 'Refreshments + ₦30,000 compensation',
-                    icon: Icons.access_time_filled_rounded,
-                    iconColor: const Color(0xFFFFC229),
-                  ),
-                  _buildAlertCard(
-                    flightCode: 'BA 075',
-                    airline: 'British Airways',
-                    priority: 'MEDIUM',
-                    time: '1 day ago',
-                    eventType: 'Baggage Delayed',
-                    eventDesc: 'Checked baggage not loaded on your connecting flight.',
-                    rights: 'Emergency supplies reimbursement',
-                    icon: Icons.info_rounded,
-                    iconColor: const Color(0xFF3B82F6),
-                  ),
-                  _buildAlertCard(
-                    flightCode: 'EK 783',
-                    airline: 'Emirates',
-                    priority: 'LOW',
-                    time: '3 hours ago',
-                    eventType: 'Gate Change',
-                    eventDesc: 'Boarding gate changed from D12 to D18.',
-                    rights: 'Informational only',
-                    icon: Icons.check_circle_rounded,
-                    iconColor: const Color(0xFF10B981),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
+          // Alerts List
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                _buildAlertCard(
+                  flightCode: 'W3 205',
+                  airline: 'Air Peace',
+                  priority: 'CRITICAL',
+                  time: '2 hours ago',
+                  eventType: 'Flight Cancelled',
+                  eventDesc: 'Your flight from Lagos to Abuja has been cancelled by the airline.',
+                  rights: 'Full refund or rebooking + ₦45,000 compensation',
+                  icon: Icons.warning_rounded,
+                  iconColor: const Color(0xFFEF4444),
+                ),
+                _buildAlertCard(
+                  flightCode: 'AA 301',
+                  airline: 'Arik Air',
+                  priority: 'HIGH',
+                  time: '5 hours ago',
+                  eventType: '4 Hour Delay',
+                  eventDesc: 'Departure delayed from 14:00 to 18:00. Monitor for updates.',
+                  rights: 'Refreshments + ₦30,000 compensation',
+                  icon: Icons.access_time_filled_rounded,
+                  iconColor: const Color(0xFFFFC229),
+                ),
+                _buildAlertCard(
+                  flightCode: 'BA 075',
+                  airline: 'British Airways',
+                  priority: 'MEDIUM',
+                  time: '1 day ago',
+                  eventType: 'Baggage Delayed',
+                  eventDesc: 'Checked baggage not loaded on your connecting flight.',
+                  rights: 'Emergency supplies reimbursement',
+                  icon: Icons.info_rounded,
+                  iconColor: const Color(0xFF3B82F6),
+                ),
+                _buildAlertCard(
+                  flightCode: 'EK 783',
+                  airline: 'Emirates',
+                  priority: 'LOW',
+                  time: '3 hours ago',
+                  eventType: 'Gate Change',
+                  eventDesc: 'Boarding gate changed from D12 to D18.',
+                  rights: 'Informational only',
+                  icon: Icons.check_circle_rounded,
+                  iconColor: const Color(0xFF10B981),
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: const BoxDecoration(
-          color: Color(0xFF0B1222),
-          border: Border(top: BorderSide(color: Color(0xFF1F2937), width: 1)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_outlined, 'Home', false, context),
-            _buildNavItem(Icons.notifications_outlined, 'Alerts', true, context),
-            _buildNavItem(Icons.auto_awesome_outlined, 'Sentinel', false, context),
-            _buildNavItem(Icons.folder_outlined, 'Vault', false, context),
-            _buildNavItem(Icons.person_outline, 'Profile', false, context),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -384,50 +365,5 @@ class _AlertsScreenState extends State<AlertsScreen> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isSelected, BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!isSelected) {
-          if (label == 'Home') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const DashboardScreen()),
-            );
-          } else if (label == 'Sentinel') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const SentinelScreen()),
-            );
-          } else if (label == 'Vault') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const VaultScreen()),
-            );
-          } else if (label == 'Profile') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),
-            );
-          }
-        }
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isSelected ? const Color(0xFFFFC229) : const Color(0xFF9CA3AF),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: isSelected ? const Color(0xFFFFC229) : const Color(0xFF9CA3AF),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }

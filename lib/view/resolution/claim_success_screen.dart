@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
+import 'package:sky_rightz_360/view/home/main_screen.dart';
 import 'package:sky_rightz_360/view/home/alerts_screen.dart';
 import 'package:sky_rightz_360/view/home/sentinel_screen.dart';
 import 'package:sky_rightz_360/view/home/vault_screen.dart';
@@ -128,7 +128,7 @@ class ClaimSuccessScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                            MaterialPageRoute(builder: (context) => const MainScreen()),
                             (route) => false,
                           );
                         },
@@ -284,7 +284,7 @@ class ClaimSuccessScreen extends StatelessWidget {
       onTap: () {
         if (!isSelected) {
           if (label == 'Home') {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const DashboardScreen()), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MainScreen()), (route) => false);
           } else if (label == 'Alerts') {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AlertsScreen()));
           } else if (label == 'Sentinel') {

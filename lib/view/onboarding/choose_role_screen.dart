@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
+import 'package:sky_rightz_360/view/home/main_screen.dart';
 
 class ChooseRoleScreen extends StatelessWidget {
   const ChooseRoleScreen({super.key});
@@ -112,7 +112,7 @@ class ChooseRoleScreen extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const DashboardScreen(),
+            builder: (context) => const MainScreen(),
           ),
         );
       },

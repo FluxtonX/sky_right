@@ -16,163 +16,130 @@ class _SentinelScreenState extends State<SentinelScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B1222), // Dark Navy
-      body: Column(
-        children: [
-          // Blue Header Section
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 60, 20, 32),
-            decoration: const BoxDecoration(
-              color: Color(0xFF2962FF), // Vibrant Blue
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ),
+    return Column(
+      children: [
+        // Blue Header Section
+        Container(
+          padding: const EdgeInsets.fromLTRB(20, 60, 20, 32),
+          decoration: const BoxDecoration(
+            color: Color(0xFF2962FF), // Vibrant Blue
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Row(
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Icon(Icons.arrow_back, color: Colors.white, size: 20),
-                      SizedBox(width: 8),
                       Text(
-                        'Back',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        'Sentinel',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'AI-powered intelligence & insights',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              // Status Card
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                const SizedBox(height: 24),
-                Row(
+                child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(16),
+                      width: 10,
+                      height: 10,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF00C853), // Green dot
+                        shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          'Sentinel',
+                          'Real-time monitoring active',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 28,
                             fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
                         ),
                         Text(
-                          'AI-powered intelligence & insights',
+                          'Tracking disruptions across 15 airlines',
                           style: TextStyle(
                             color: Colors.white70,
-                            fontSize: 14,
+                            fontSize: 13,
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 32),
-                // Status Card
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF00C853), // Green dot
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Real-time monitoring active',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            'Tracking disruptions across 15 airlines',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Tab Selector
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1F2937),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              children: [
+                _buildTab('Alert List'),
+                _buildTab('Live Map'),
+                _buildTab('AI Forecast'),
               ],
             ),
           ),
-
-          // Tab Selector
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1F2937),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                children: [
-                  _buildTab('Alert List'),
-                  _buildTab('Live Map'),
-                  _buildTab('AI Forecast'),
-                ],
-              ),
-            ),
-          ),
-
-          // Content Section
-          Expanded(
-            child: _selectedTab == 'Live Map' 
-                ? _buildLiveMapView() 
-                : _selectedTab == 'AI Forecast'
-                    ? _buildAIForecastView()
-                    : _buildAlertListView(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: const BoxDecoration(
-          color: Color(0xFF0B1222),
-          border: Border(top: BorderSide(color: Color(0xFF1F2937), width: 1)),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.home_outlined, 'Home', false, 0),
-            _buildNavItem(Icons.notifications_outlined, 'Alerts', false, 1),
-            _buildNavItem(Icons.auto_awesome_outlined, 'Sentinel', true, 2),
-            _buildNavItem(Icons.folder_outlined, 'Vault', false, 3),
-            _buildNavItem(Icons.person_outline, 'Profile', false, 4),
-          ],
+
+        // Content Section
+        Expanded(
+          child: _selectedTab == 'Live Map' 
+              ? _buildLiveMapView() 
+              : _selectedTab == 'AI Forecast'
+                  ? _buildAIForecastView()
+                  : _buildAlertListView(),
         ),
-      ),
+      ],
     );
   }
 
@@ -688,54 +655,6 @@ class _SentinelScreenState extends State<SentinelScreen> {
                 elevation: 0,
               ),
               child: const Text('Start Resolution'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, bool isSelected, int index) {
-    return GestureDetector(
-      onTap: () {
-        if (!isSelected) {
-          if (label == 'Home') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const DashboardScreen()),
-            );
-          } else if (label == 'Alerts') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const AlertsScreen()),
-            );
-          } else if (label == 'Vault') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const VaultScreen()),
-            );
-          } else if (label == 'Profile') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),
-            );
-          }
-        }
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isSelected ? const Color(0xFFFFC229) : const Color(0xFF9CA3AF),
-            size: 24,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 11,
-              color: isSelected ? const Color(0xFFFFC229) : const Color(0xFF9CA3AF),
             ),
           ),
         ],

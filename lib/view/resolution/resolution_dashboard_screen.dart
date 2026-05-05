@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_rightz_360/view/home/dashboard_screen.dart';
+import 'package:sky_rightz_360/view/home/main_screen.dart';
 import 'package:sky_rightz_360/view/home/alerts_screen.dart';
 import 'package:sky_rightz_360/view/home/sentinel_screen.dart';
 import 'package:sky_rightz_360/view/home/vault_screen.dart';
@@ -380,7 +380,7 @@ class ResolutionDashboardScreen extends StatelessWidget {
           if (label == 'Home') {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const DashboardScreen()),
+              MaterialPageRoute(builder: (context) => const MainScreen()),
             );
           } else if (label == 'Alerts') {
             Navigator.pushReplacement(
